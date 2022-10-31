@@ -184,25 +184,13 @@ file = open('images.txt', 'w')
 # create_frames("./dataset/Stable_Video_1.mp4", 1, file)
 create_frames("./dataset/Stable_Video_1.mp4")
 enhance_frames("./images/Stable_Video_1.mp4", 1, file)
-# image_folder = open("./images.txt", 'r')
 
 createROIS("./enhanced_images/inverse_law/Stable_Video_1.mp4", mode=2)
 formated_output = pd.DataFrame(d);
 
-# formated_output.style.set_table_styles([{'selector' : '',
-# 'props' : [('border',
-# '2px solid white')]}])
 
 print(formated_output)
+# print(formated_output.head())
 file.close()
 print("Execution time: ",time.time() - start_time)
 
-
-# print(image_folder[0])
-# paths = image_folder.readlines()
-# print("***********************************")
-# print(paths)
-# rotatedl = []
-# for path in paths:
-#     rotatedl.append(path.strip())
-# print(rotatedl)
