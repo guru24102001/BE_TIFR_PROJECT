@@ -31,7 +31,7 @@ def create_frames(path):
             if np.mean(frame) < 25:
                 print("Removed the frame")
                 continue
-            if frame_counter % 20 == 0:
+            if frame_counter % 400 == 0:
                 reduced_frames += 1
                 resized_frame = cv2.resize(frame, (960, 540))
                 cv2.imwrite(f'./images/{name}/frame_{frame_counter}.jpg', resized_frame)
@@ -173,10 +173,19 @@ def createROIS(image_folder, mode):
         for path in files:
             img_raw = cv2.imread(image_folder + "/" + path)
             showROIS(ROIs, img_raw, names)
+    else:
+        for path in files:
+            print(image_folder + "/" + path)
 
+            abcd = reader.readtext(image_folder + "/" + path)
+            for line in abcd:
+                print(f"{line[0]}      {line[1]}")
+            print("*****************************************************************")
 
-
-    
+# [[391, 25], [487, 25], [487, 43], [391, 43]]      DSO-X 3014A
+# [[390, 25], [487, 25], [487, 46], [390, 46]]      DSO-X 3014A
+# [[391, 27], [487, 27], [487, 45], [391, 45]]      DSO-X 3014A
+# [[390, 25], [487, 25], [487, 46], [390, 46]]      DSO-X 3014A
 
 #####################################################################################################
 
@@ -184,13 +193,25 @@ file = open('images.txt', 'w')
 # create_frames("./dataset/Stable_Video_1.mp4", 1, file)
 create_frames("./dataset/Stable_Video_1.mp4")
 enhance_frames("./images/Stable_Video_1.mp4", 1, file)
+# image_folder = open("./images.txt", 'r')
 
 createROIS("./enhanced_images/inverse_law/Stable_Video_1.mp4", mode=2)
 formated_output = pd.DataFrame(d);
 
+# formated_output.style.set_table_styles([{'selector' : '',
+# 'props' : [('border',
+# '2px solid white')]}])
 
 print(formated_output)
-# print(formated_output.head())
 file.close()
 print("Execution time: ",time.time() - start_time)
 
+
+# print(image_folder[0])
+# paths = image_folder.readlines()
+# print("***********************************")
+# print(paths)
+# rotatedl = []
+# for path in paths:
+#     rotatedl.append(path.strip())
+# print(rotatedl)

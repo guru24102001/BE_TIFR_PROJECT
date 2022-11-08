@@ -20,6 +20,10 @@ start_time = time.time()
 # pytesseract.pytesseract.tesseract_cmd = 'D:\\roi_selection_and_ocr_with_orientation_correction-master\\tesseract.exe'
 
 
+# keras-ocr will automatically download pretrained
+# weights for the detector and recognizer.
+pipeline = keras_ocr.pipeline.Pipeline()
+
 def create_frames(path):
     frame_counter = 0
     reduced_frames = 0
@@ -37,7 +41,7 @@ def create_frames(path):
             if np.mean(frame) < 15:
                 print("Removed the frame")
                 continue
-            if frame_counter % 200 == 0:
+            if frame_counter % 400 == 0:
                 resized_frame = cv2.resize(frame, (960, 540))
                 cv2.imwrite(
                     f'./images/{name}/frame_{frame_counter}.jpg', resized_frame)
@@ -182,6 +186,10 @@ def showROIS(ROIs, img_raw, names):
 def createROIS(image_folder, mode):
     files = os.listdir(image_folder)
     print(files)
+    lst=[]
+    for file in files:
+        lst.append(image_folder + "/" + file)
+
     if mode == 1:
         for path in image_folder:
             img_raw = cv2.imread(image_folder + "/" + path)
@@ -213,9 +221,31 @@ def createROIS(image_folder, mode):
             img_raw = cv2.imread(image_folder + "/" + path)
             showROIS(ROIs, img_raw, names)
     else:
-        pass
-        # for path in image_folder:
-        #     print(pytesseract.image_to_string(path))
+        
+        images = [
+            keras_ocr.tools.read(url) for url in lst
+        ]
+        prediction_groups = pipeline.recognize(images)
+        abcd = prediction_groups
+        for lst in abcd:
+            for tup in lst:
+                arr = tup[1]
+                print(f"{tup[0]}    {arr[0]}  {arr[1]}  {arr[2]}  {arr[3]}")
+
+
+        # print(lst)
+        # print(image_folder + "/" + path)
+        # abcd = reg.recognize(image_folder + "/" + path)
+        # print(abcd)
+        # for line in abcd:
+        #     print(f"{line[0]}      {line[1]}")
+        print("*****************************************************************")
+
+
+# dsox    [391.  28.]  [439.  28.]  [439.  43.]  [391.  43.]
+# dsox    [391.  28.]  [439.  28.]  [439.  42.]  [391.  42.]
+# dsox    [391.  28.]  [439.  28.]  [439.  43.]  [391.  43.]
+# dsox    [391.  28.]  [439.  28.]  [439.  42.]  [391.  42.]
 
 
 #####################################################################################################
@@ -237,7 +267,7 @@ file = open('images.txt', 'w')
 create_frames("./dataset/Stable_Video_1.mp4")
 enhance_frames("./images/Stable_Video_1.mp4", 1, file)
 # image_folder = open("./images.txt", 'r')
-createROIS("./enhanced_images/inverse_law/Stable_Video_1.mp4", mode=2)
+createROIS("./enhanced_images/inverse_law/Stable_Video_1.mp4", mode=3)
 # formated_output = pd.DataFrame(d);
 
 # formated_output.style.set_table_styles([{'selector' : '',
