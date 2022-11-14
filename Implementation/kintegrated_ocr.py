@@ -267,7 +267,7 @@ file = open('images.txt', 'w')
 create_frames("./dataset/Stable_Video_1.mp4")
 enhance_frames("./images/Stable_Video_1.mp4", 1, file)
 # image_folder = open("./images.txt", 'r')
-createROIS("./enhanced_images/inverse_law/Stable_Video_1.mp4", mode=3)
+createROIS("./enhanced_images/inverse_law/Stable_Video_1.mp4", mode=2)
 # formated_output = pd.DataFrame(d);
 
 # formated_output.style.set_table_styles([{'selector' : '',
