@@ -1,9 +1,0 @@
-/* All technology stack used and its versions to be written here. */
-//
-//
-//
-//
-//
-//
-//
-//
