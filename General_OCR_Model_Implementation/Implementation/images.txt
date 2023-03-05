@@ -1,0 +1,4 @@
+./enhanced_images/inverse_law/Stable_Video_1.mp4/frame_0.jpg
+./enhanced_images/inverse_law/Stable_Video_1.mp4/frame_1200.jpg
+./enhanced_images/inverse_law/Stable_Video_1.mp4/frame_400.jpg
+./enhanced_images/inverse_law/Stable_Video_1.mp4/frame_800.jpg
