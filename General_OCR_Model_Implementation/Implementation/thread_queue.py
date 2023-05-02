@@ -82,7 +82,7 @@ class WebcamStream:
 # initializing and starting multi-threaded webcam capture input stream
 # stream_id = 0 is for primary camera
 webcam_stream = WebcamStream(
-    stream_id='rtsp://ajay:aju13@192.168.0.102:8080/h264_pcm.sdp')
+    stream_id='rtsp://Guru:Guru1@192.168.167.102:8080/h264_pcm.sdp')
 webcam_stream.start()
 
 # processing frames in input stream

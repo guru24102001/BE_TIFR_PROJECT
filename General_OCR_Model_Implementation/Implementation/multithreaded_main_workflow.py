@@ -203,7 +203,8 @@ print('Camera check')
 # capture = cv2.VideoCapture(
 #     "dataset/Stable_Video_1.mp4")
 webcam_stream = thread_queue.WebcamStream(
-    stream_id='rtsp://ajay:aju13@192.168.0.102:8080/h264_pcm.sdp')
+    stream_id='rtsp://Guru:Guru1@192.168.167.102:8080/h264_pcm.sdp')
+webcam_stream.start()
 # webcam_stream = threading_test.WebcamStream(
 #     stream_id='dataset\Stable_Video_1.mp4')
 # capture = cv2.VideoCapture(
